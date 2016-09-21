@@ -9,6 +9,9 @@ public class Ex_01
 		Scanner kb = new Scanner(System.in);
 		
 		
+		String dots1 = "..........";
+		
+		
 		System.out.println("Please enter item 1:");
 		
 		String item1 = kb.nextLine();
@@ -42,11 +45,44 @@ public class Ex_01
 		kb.nextLine();
 		
 		
-		System.out.println("<<<<<<<<<<<<<<<__Receipt__>>>>>>>>>>>>>>>>\n\n");
+		String Sub = "Subtotal";
+		
+		double subtotal = (price1+price2+price3);
+		
+		
+		System.out.println("\n\n<<<<<<<<__Receipt__>>>>>>>>>\n");
+		
+		form.format(item1, price1);
+		
+		form.format(item2, price2);
+		
+		form.format(item3, price3);
+		
+		
+		System.out.println("\n");
+		
+		form.format(Sub, subtotal);
+		
+		
+		String tax = "Tax";
+		
+		double tax1 = (subtotal*.1);
+		
+		String total = "Total";
+		
+		double totes = (subtotal+tax1);
+		
+		
+		form.format(tax, tax1);
+		
+		form.format(total, totes);
+		
+		
+		System.out.println("_____________________________________\n          *Thank you for your service*");
 	}
 	
 	public void format (String item, double price)
 	{
-		System.out.printf("*%18s ..........\t %3.2f", item, price);
+		System.out.printf("* %15s .......... %10.2f\n", item, price);
 	}
 }
