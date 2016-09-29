@@ -7,13 +7,15 @@ public class Ex_02
 		Scanner BMIcalc = new Scanner(System.in);
 		
 		
-		System.out.println("Want to know your BMI? Enter your height in inches, press enter, then enter your weight in pounds.");
+		System.out.println("Want to know your BMI? Enter your height in inches.");
 		
-		int height = BMIcalc.nextInt();
+		double height = BMIcalc.nextInt();
 		
-		int weight = BMIcalc.nextInt();
+		System.out.println("Now, enter your weight in pounds.");
 		
-		int BMI = (703 * weight / (height * height));
+		double weight = BMIcalc.nextInt();
+		
+		double BMI = (703 * weight / (height * height));
 		
 		System.out.println("Your BMI is " + BMI + ". \nYou want to be inbetween 18.5 and 25.");
 	}
