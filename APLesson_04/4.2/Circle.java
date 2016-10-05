@@ -20,7 +20,7 @@ public class Circle
 	
 	public static void calcArea()
 	{
-		area = 2*3.14*r;
+		area = 3.14*Math.pow(r,2);
 	}
 	
 	public static void print()
