@@ -17,6 +17,6 @@ public class Ex_02
 		
 		double BMI = (703 * weight / (height * height));
 		
-		System.out.println("Your BMI is " + BMI + ". \nYou want to be inbetween 18.5 and 25.");
+		System.out.printf("Your BMI is %2.1f. \nYou want it to be between 18.5 and 25.\n", BMI);
 	}
 }

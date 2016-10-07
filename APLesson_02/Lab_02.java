@@ -14,7 +14,7 @@ public class Lab_02
 		String state = "NY";
 		String zip = "10128";
 		
-		System.out.println(name +"\n"+ address +", " + city +", "+ state +"\n"+ zip);
+		System.out.println(name +"\n"+ address +"\n" + city +", "+ state +", "+ zip);
 		
 		int l = 16;
 		int w = 34;
