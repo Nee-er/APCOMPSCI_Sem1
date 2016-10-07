@@ -35,9 +35,12 @@ public class Ex_02
 		String subtotal = "Subtotal";
 		String discount1 = "Discount";
 		String total = "Total";
+		
 		double total1 = price1 + price2 + price3 + price4;
+		
 		String tax = "Tax";
 		double tax1 = (total1*.1);
+		
 		double total2 = (price1 + price2 + price3 + price4) - (price1+price2+price3+price4)*.15 + tax1;
 		double discount2 = (price1+price2+price3+price4)*.15;
 		double noDiscount = 0;
@@ -49,7 +52,9 @@ public class Ex_02
 		money.format(item2, price2);
 		money.format(item3, price3);
 		money.format(item4, price4);
+		
 		System.out.println("\n");
+		
 		money.format(subtotal, total1);
 		money.format(tax, tax1);
 		
@@ -75,6 +80,6 @@ public class Ex_02
 	
 	public void format(String i, double p)
 	{
-		System.out.printf("* %15s ......... %-15.2f\n", i, p);
+		System.out.printf("* %15s ......... %15.2f\n", i, p);
 	}
 }
