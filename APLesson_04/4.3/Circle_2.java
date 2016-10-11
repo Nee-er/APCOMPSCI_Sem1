@@ -25,6 +25,6 @@ public class Circle_2
 	
 	public void print(double ra, double ar)
 	{
-		System.out.printf("The area of a circle with a radius of %10.5fft is %10.5fft squared.\n", ra, ar);
+		System.out.printf("The area of a circle with a radius of %.5fft is %.5fft squared.\n", ra, ar);
 	}
 }

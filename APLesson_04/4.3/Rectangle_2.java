@@ -29,6 +29,6 @@ public class Rectangle_2
 	
 	public void print(double p)
 	{
-		System.out.printf("Your rectangle is %10.5fft around.\n", p);
+		System.out.printf("Your rectangle is %.5fft around.\n", p);
 	}
 }

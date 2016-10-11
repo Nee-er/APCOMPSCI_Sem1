@@ -30,6 +30,6 @@ public class Rectanlge
 	
 	public static void print()
 	{
-		System.out.printf("Your rectanlge is %10.5fft around.", p);
+		System.out.printf("Your rectanlge is %.5fft around.", p);
 	}
 }

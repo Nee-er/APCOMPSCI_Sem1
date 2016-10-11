@@ -33,6 +33,6 @@ public class Average_2
 	
 	public void print(double one, double two, double three, double a)
 	{
-		System.out.printf("The average of %10.5f, %10.5f, and %10.5f is %10.5f.\n", one, two, three, a);
+		System.out.printf("The average of %.5f, %.5f, and %.5f is %.5f.\n", one, two, three, a);
 	}
 }

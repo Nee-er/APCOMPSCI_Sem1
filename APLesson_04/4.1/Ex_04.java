@@ -26,7 +26,7 @@ public class Ex_04
 		
 		double volFeet = volume.calcVol(volInch);
 		
-		System.out.printf("The voulume your speaker can have is %8.3f feet cubed", volFeet);
+		System.out.printf("The voulume your speaker can have is %.3f feet cubed", volFeet);
 	}
 	
 	public double calcVol(double v)

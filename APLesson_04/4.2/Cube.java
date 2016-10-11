@@ -25,6 +25,6 @@ public class Cube
 	
 	public static void print()
 	{
-		System.out.printf("The surface area of a cube with %10.5fft sides is %10.5fft squared.", side, sa);
+		System.out.printf("The surface area of a cube with %.5fft sides is %.5fft squared.", side, sa);
 	}
 }

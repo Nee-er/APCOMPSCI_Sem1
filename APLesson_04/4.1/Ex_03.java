@@ -28,7 +28,7 @@ public class Ex_03
 		double payment = loan.calcPay(princpl, rate, number, time);
 		
 		
-		System.out.printf("Your total monthly payment is $%-10.2f\n", payment);
+		System.out.printf("Your total monthly payment is $%.2f\n", payment);
 	}
 	
 	public double calcPay(double p, double r, double n, double t)
