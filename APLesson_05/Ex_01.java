@@ -8,26 +8,23 @@ public class Ex_01
 	
 	public static void main(String[]args)
 	{
-		Ex_01 dice = new Ex_01();
-		Random rand = new Random ();
-		
-		player = rand.nextInt(6)+1;
-		computer = rand.nextInt(6)+1;
+		player = (int)(Math.random()*7)+1;
+		computer = (int)(Math.random()*7)+1;
 		
 		rollDice();
 		
 		System.out.println("You rolled a "+player+"\nThe computer rolled a "+computer);
 		
-		System.out.println("And the winner is..." + winner);
+		System.out.println("The winner is " + winner);
 	}
 	
-	public static String rollDice()
+	public static void rollDice()
 	{
 		if(player>computer)
-			winner = "Player";
+			winner = "you!";
 		if(computer>player)
-			winner = "Computer";
-		if(player==computer)
+			winner = "the computer!";
+		if(computer==player)
 			winner = "no one! Everybody loses!";
 	}
 }
