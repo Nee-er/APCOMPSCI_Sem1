@@ -10,7 +10,7 @@ public class Ex_04
 		System.out.println("Enter a sentence: ");
 		sentence = kb.nextLine();
 		replace();
-		System.out.println("With @s, !s, $s, and 0s... " + sentence);
+		System.out.println("Now it's... " + sentence);
 	}
 	
 	public static void replace()
@@ -34,6 +34,18 @@ public class Ex_04
 		while(sentence.indexOf("e") > 0)
 		{
 			sentence = sentence.substring(0, sentence.indexOf("e")) + "3" + sentence.substring(sentence.indexOf("e") + 1);
+		}
+		while(sentence.indexOf("h") > 0)
+		{
+			sentence = sentence.substring(0, sentence.indexOf("h")) + "|-|" + sentence.substring(sentence.indexOf("h") + 1);
+		}
+		while(sentence.indexOf("g") > 0)
+		{
+			sentence = sentence.substring(0, sentence.indexOf("g")) + "9" + sentence.substring(sentence.indexOf("g") + 1);
+		}
+		while(sentence.indexOf("t") > 0)
+		{
+			sentence = sentence.substring(0, sentence.indexOf("t")) + "+" + sentence.substring(sentence.indexOf("t") + 1);
 		}
 	}
 }
