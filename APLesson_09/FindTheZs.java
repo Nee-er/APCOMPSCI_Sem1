@@ -34,7 +34,7 @@ public class FindTheZs
 		String zs = " ";
 		for(String word : words)
 		{
-			if(word.indexOf("z") > 0)
+			if(word.indexOf("z") >= 0)
 			{
 				zs = zs.substring(0, zs.length()) + " " + word.substring(0, word.length());
 			}
