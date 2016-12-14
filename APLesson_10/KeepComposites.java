@@ -32,7 +32,7 @@ public class KeepComposites
 			if(gFactor(n.get(i))==-0)
 			{
 				n.remove(i);
-				i =- 1;
+				i = i - 1;
 			}
 		}
 	}
