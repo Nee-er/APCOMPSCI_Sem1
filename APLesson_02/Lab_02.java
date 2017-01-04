@@ -23,4 +23,4 @@ public class Lab_02
 		
 		System.out.println("The surface area of your rectangle is " + surfaceArea);
 	}
-}
+} 

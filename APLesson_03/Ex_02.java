@@ -19,4 +19,4 @@ public class Ex_02
 		
 		System.out.printf("Your BMI is %2.1f. \nYou want it to be between 18.5 and 25.\n", BMI);
 	}
-}
+} 
