@@ -1,59 +1,62 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 public class ToyStore
 {
-	private ArrayList<Toy> toyList = new ArrayList<Toy>();
+	private ArrayList<Toy>toyList;
+	private String toyStock;
 	
 	public ToyStore()
 	{
+		toyStock = "";
 		toyList = new ArrayList<Toy>();
 	}
 	
-	public ToyStore(ArrayList<Toy>t)
+	public ToyStore(String t)
 	{
-		toyList = t;
+		toyStock = t;
 		loadToys(t);
 	}
 	
-	public void loadToys(ArrayList<Toy>ts)
+	public void loadToys(String ts)
 	{
-		ArrayList<String> toys = new ArrayList<>(Arrays.asList(ts.split(", ")));
-		for(int i = 0; i <= toys.length()-1; i++)
+		ArrayList<String> toys = new ArrayList<String>(Arrays.asList(ts.split(", ")));
+		for(int i = 0; i <= toys.size()-1; i++)
 		{
-			String name = toys[i];
-			String type = toys[i + 1];
-			Toy object = new Toy(getThatToy(name));
-			if(getThatToy(name).equals(""))
+			String name = toys.get(i);
+			String type = toys.get(i + 1);
+			Toy t = getThatToy(name);
+			if(getThatToy(name).equals(null))
 			{
-				if(toys[i].equals("Car"))
+				if(type.equals("Car"))
 				{
-					toyList.add("Car");
+					toyList.add(new Car(name));
 				}
-				if(toys[i].equals("AFigure"))
+				if(type.equals("AF"))
 				{
-					toyList.add("AF");
+					toyList.add(new AFigure(name));
 				}
 			}
 			else
-				i++;
+				t.setCount(t.getCount() + 1);
 		}
 	}
 	
-	public static String getThatToy(String nm)
+	public Toy getThatToy(String nm)
 	{
 		for(Toy x : toyList)
 		{
-			if(x.equals(nm))
+			if(x.getName().equals(nm))
 			{
 				return x;
 			}
 			else
 			{
-				return "";
+				return null;
 			}
 		}
 	}
 	
-	public static String getMostFrequentToy()
+	public String getMostFrequentToy()
 	{
 		String name;
 		int max = Integer.MIN_VALUE;
@@ -62,13 +65,13 @@ public class ToyStore
 			if(max < x)
 			{
 				max = x;
-				name.equals(toyList[x]);
+				name.equals(toyList.get(x));
 			}
 		}
 		return name;
 	}
 	
-	public static String getMostFrequentType()
+	public String getMostFrequentType()
 	{
 		int cars = 0;
 		int figures = 0;
@@ -95,7 +98,7 @@ public class ToyStore
 		}
 	}
 	
-	public static String toString()
+	public String toString()
 	{
 		return toyList;
 	}

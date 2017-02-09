@@ -15,12 +15,22 @@ public abstract class Toy
 		this.count = 1;
 	}
 	
-	public String setName()
+	public void setName(String n)
+	{
+		this.name = n;
+	}
+	
+	public void setCount(int c)
+	{
+		this.count = c;
+	}
+	
+	public String getName()
 	{
 		return name;
 	}
 	
-	public int setCount()
+	public int getCount()
 	{
 		return count;
 	}
