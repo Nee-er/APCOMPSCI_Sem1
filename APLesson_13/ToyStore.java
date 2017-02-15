@@ -3,29 +3,27 @@ import java.util.Arrays;
 public class ToyStore
 {
 	private ArrayList<Toy>toyList;
-	private String toyStock;
 	
 	public ToyStore()
 	{
-		toyStock = "";
 		toyList = new ArrayList<Toy>();
 	}
 	
 	public ToyStore(String t)
 	{
-		toyStock = t;
 		loadToys(t);
 	}
 	
 	public void loadToys(String ts)
 	{
 		ArrayList<String> toys = new ArrayList<String>(Arrays.asList(ts.split(", ")));
-		for(int i = 0; i <= toys.size()-1; i++)
+		toyList = new ArrayList<Toy>();
+		for(int i = 0; i < toys.size(); i+= 2)
 		{
 			String name = toys.get(i);
 			String type = toys.get(i + 1);
 			Toy t = getThatToy(name);
-			if(getThatToy(name).equals(null))
+			if(t == null)
 			{
 				if(type.equals("Car"))
 				{
@@ -49,23 +47,20 @@ public class ToyStore
 			{
 				return x;
 			}
-			else
-			{
-				return null;
-			}
 		}
+		return null;
 	}
 	
 	public String getMostFrequentToy()
 	{
-		String name;
+		String name = "";
 		int max = Integer.MIN_VALUE;
 		for(Toy x : toyList)
 		{
-			if(max < x)
+			if(max < x.getCount())
 			{
-				max = x;
-				name.equals(toyList.get(x));
+				max = x.getCount();
+				name = x.getName();
 			}
 		}
 		return name;
@@ -78,9 +73,9 @@ public class ToyStore
 		
 		for(Toy x : toyList)
 		{
-			if(x.equals("Car"))
+			if(x.getType().equals("Car"))
 				cars++;
-			if(x.equals("AF"))
+			if(x.getType().equals("AF"))
 				figures++;
 		}
 		
@@ -100,6 +95,6 @@ public class ToyStore
 	
 	public String toString()
 	{
-		return toyList;
+		return "" + toyList;
 	}
 }
