@@ -1,24 +1,21 @@
-public class GMC implements Location
+public class GMC extends Car
 {
-	private int x, y;
+	private double x, y;
 	
 	public GMC()
 	{
+		super();
 		x = y = 0;
 	}
 	
-	public GMC(int x, int y)
+	public GMC(double x, double y)
 	{
+		super();
 		this.x = x;
 		this.y = y;
 	}
 	
-	public int getID()
-	{
-		return (int)(Math.random()*1000000)+1;
-	}
-	
-	public void move(int x, int y)
+	public void move(double x, double y)
 	{
 		
 	}
