@@ -9,10 +9,11 @@ public class Satellite
        locate.add(new Toyota("8, 9"));
        locate.add(new GMC(3, 8));
 
-        double[] home = {0, 0};
-
-        String printout = "\n\n" +
-               "==========================" + "\nStarting locations...";
+       double[] home = {0, 0};
+	   Car c = new Car();
+		
+		String printout = "\n\n" +
+            "==========================" + "\nStarting locations...";
 
         for (Location l : locate)
        {
@@ -28,6 +29,21 @@ public class Satellite
        }
 
         System.out.println(printout);
+		
+		System.out.println("\n\n==========================");
+		
+		for(Location l : locate)
+	   {
+		   double one = (Math.random()*100)+1;
+		   double two = (Math.random()*100)+1;
+		   
+		   System.out.printf("After %d Moved (%.2f, %.2f)\n", l.getID(), one, two);
+		   
+		   one += 1;
+		   two += 2;
+		   
+		   System.out.printf("New Location: (%.2f ,%.2f)\n\n\n", one, two);
+	   }
    }
 
     public static double getDistance(double[] car, double[] home)
