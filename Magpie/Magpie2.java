@@ -21,7 +21,6 @@ public class Magpie2
 		 * 	if you enter nothing, or if you accidentally hit
 		 * 	enter. Think to yourself: "What is the length of
 		 * 	an empty String?" */
-		System.out.println(statement.trim().length());
 		if(statement.trim().length() == 0)
 		{
 			response = "Say something, please.";
@@ -30,7 +29,7 @@ public class Magpie2
 		/** To be completed in Exercise_02:
 		 * 	Modify the following code to use the findKeyword
 		 * 	Method (details in "Exercise_02" below. */
-		if (statement.indexOf("no") >= 0)
+		if (statement.toLowerCase().indexOf("no") >= 0)
 		{
 			response = "Why so negative?";
 		}
@@ -79,8 +78,14 @@ public class Magpie2
 				Check if psn > 0 - there is no need to check for before at the
 				beginning of the word
 					set before = the slot in phrase before psn */
+		String words = statement.trim();
 
-				//====>code here
+		int psn = statement.toLowerCase().indexOf(goal.toLowerCase(), startPos);
+		
+		while(psn >= 0)
+		{
+			String before = words.substring(psn - 1);
+		}
 
 				/*check if you can fit goal into the rest of phrase - no need to
 				proceed otherwise
