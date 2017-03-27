@@ -1,58 +1,54 @@
 public class Magpie2
 {
-	/** Get a default greeting @return a greeting*/
 	public String getGreeting()
 	{
 		return "Hello, let's talk.";
 	}
 	
-	/** getResponse() method
-	 * ===========================================
-	 * 	Gives a response to a user statement
-	 *  @param statement (the user statement)
-	 * 	@return a response based on the rules given */
 	public String getResponse(String statement)
 	{
 		String response = "";
 
-		/** Exercise_01:
-		 * ==================================================
-		 * 	Code that asks the user "Say something, please."
-		 * 	if you enter nothing, or if you accidentally hit
-		 * 	enter. Think to yourself: "What is the length of
-		 * 	an empty String?" */
 		if(statement.trim().length() == 0)
 		{
 			response = "Say something, please.";
 		}
-
-		/** To be completed in Exercise_02:
-		 * 	Modify the following code to use the findKeyword
-		 * 	Method (details in "Exercise_02" below. */
-		if (statement.toLowerCase().indexOf("no") >= 0)
+		 
+		if(findKeyword(statement, "no", statement.toLowerCase().indexOf("no")) >= 0)
 		{
 			response = "Why so negative?";
 		}
+		
 
-		else if (statement.indexOf("mother") >= 0
-				|| statement.indexOf("father") >= 0
-				|| statement.indexOf("sister") >= 0
-				|| statement.indexOf("brother") >= 0)
+		else if (findKeyword(statement, "mother", statement.toLowerCase().indexOf("mother")) >= 0
+				|| findKeyword(statement, "father", statement.toLowerCase().indexOf("father")) >= 0
+				|| findKeyword(statement, "sister", statement.toLowerCase().indexOf("sister")) >= 0
+				|| findKeyword(statement, "brother", statement.toLowerCase().indexOf("brother")) >= 0
+				|| findKeyword(statement, "mom", statement.toLowerCase().indexOf("mom")) >= 0
+				|| findKeyword(statement, "dad", statement.toLowerCase().indexOf("dad")) >= 0)
 		{
 			response = "Tell me more about your family.";
 		}
 
-		/** Exercise_03(Final)
-		 * ==================================================
-		 * Create additional code (another else if) that
-		 * responds "Tell me more about your pet" if the
-		 * user mentions the word cat, dog, fish, or turtle
-		 * in their statement.
-		 *
-		 * Create addtional code (another else if) that
-		 * responds "He sounds like a pretty dank teacher"
-		 * if you mention "Robinette" in your statement */
 
+		else if (findKeyword(statement, "cat", statement.toLowerCase().indexOf("cat")) >= 0
+				|| findKeyword(statement, "dog", statement.toLowerCase().indexOf("dog")) >= 0
+				|| findKeyword(statement, "fish", statement.toLowerCase().indexOf("fish")) >= 0
+				|| findKeyword(statement, "turtle", statement.toLowerCase().indexOf("turtle")) >= 0)
+		{
+			response = "Tell me more about your pet.";
+		}
+		
+		else if (findKeyword(statement, "Robinette", statement.toLowerCase().indexOf("Robinette")) >= 0)
+		{
+			response = "Sounds like a pretty dank teacher.";
+		}
+		
+		else if (statement.trim().length() == 0)
+		{
+			response = "Say something, please.";
+		}
+		
 		else
 		{
 			response = getRandomResponse();
@@ -78,26 +74,38 @@ public class Magpie2
 				Check if psn > 0 - there is no need to check for before at the
 				beginning of the word
 					set before = the slot in phrase before psn */
-		String words = statement.trim();
 
 		int psn = statement.toLowerCase().indexOf(goal.toLowerCase(), startPos);
+		String before = " ";
+		String after = " ";
 		
 		while(psn >= 0)
 		{
-			String before = words.substring(psn - 1);
-		}
-
+			if(psn > 0)
+			{
+				before = statement.substring(psn - 1, psn).toLowerCase();
+			}
+		
 				/*check if you can fit goal into the rest of phrase - no need to
 				proceed otherwise
 					set after = the slot in phrase after psn + length of goal */
 
-				//=====> code here
+			if(psn + goal.length() < statement.length())
+			{
+				after = statement.substring(psn + goal.length(), psn + goal.length() + 1).toLowerCase();
+			}
 
 				/* if before and after are not letters (compare before to "a"
 					and after to "z")
 						--return psn
-
 				Otherwise, search for goal in phrase from psn + 1 forward */
+			
+			if(((before.compareTo("a") < 0) || (before.compareTo("z")) > 0) && ((after.compareTo("a") < 0) || (after.compareTo("z") > 0)))
+			{
+				return psn;
+			}
+			psn = statement.indexOf(goal.toLowerCase(), psn + 1);
+		}
 
 		return -1;
 
