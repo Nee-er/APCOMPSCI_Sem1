@@ -18,11 +18,7 @@ public class Car implements Location
 		return ID;
 	}
 	
-	public void move(double x, double y)
-	{
-		this.x += x;
-		this.y += y;
-	}
+	
 	
 	
 	public double[] getLoc()
