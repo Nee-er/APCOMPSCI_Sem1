@@ -126,7 +126,7 @@ public class Magpie2
 		int psnOfI = findKeyword(statement, "I");
 		int psnOfYou = findKeyword(statement, "You", psnOfI);
 		
-		String restOfStatement = statement.substring(psnOfI, psnOfYou);
+		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou);
 		
 		return "Why do you" + restOfStatement + "me?";
 	}
