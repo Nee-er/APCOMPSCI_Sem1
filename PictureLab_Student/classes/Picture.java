@@ -173,6 +173,75 @@ public class Picture extends SimplePicture
     } 
   }
   
+  public void mirrorVerticalRighttoLeft()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = 0; col < width / 2; col++)
+      {
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[row][width - 1 - col];
+        leftPixel.setColor(rightPixel.getColor());
+      }
+    } 
+  }
+  
+  public void mirrorHorizontal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int length = pixels.length;
+    for (int col = 0; col < pixels[0].length; col++)
+    {
+      for (int row = 0; row < length / 2; row++)
+      {
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[length - 1 - row][col];
+        bottomPixel.setColor(topPixel.getColor());
+      }
+    } 
+  }
+  
+  public void mirrorHorizontalBotToTop()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int length = pixels.length;
+    for (int col = 0; col < pixels[0].length; col++)
+    {
+      for (int row = 0; row < length / 2; row++)
+      {
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[length - 1 - row][col];
+        topPixel.setColor(bottomPixel.getColor());
+      }
+    } 
+  }
+  
+  public void mirrorDiagonal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+	Pixel lowerPixel = null;
+    Pixel upperPixel = null;
+    int length = pixels.length;
+	int width = pixels[0].length;
+    for (int line = 0; (line < pixels[0].length || line < pixels.length); line++)
+    {
+      for (int col = 0; col <= line; col++)
+      {
+        lowerPixel = pixels[col][line];
+        upperPixel = pixels[line][col];
+        lowerPixel.setColor(upperPixel.getColor());
+      }
+    } 
+  }
+  
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -193,8 +262,44 @@ public class Picture extends SimplePicture
         rightPixel = pixels[row]                       
                          [mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
-      }
+		count++;
+	  }
     }
+	System.out.println(count);
+  }
+  
+  public void mirrorArms()
+  {
+    int mirrorPoint = 191;
+	int mirrorPoint2 = 196;
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int count = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    
+    for (int col = 105; col < 170; col++)
+    {
+      for (int row = 160; row < mirrorPoint; row++)
+      {
+        
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        bottomPixel.setColor(topPixel.getColor());
+		count++;
+	  }
+    }
+	for (int col = 238; col < 294; col++)
+    {
+      for (int row = 172; row < mirrorPoint2; row++)
+      {
+        
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        bottomPixel.setColor(topPixel.getColor());
+		count++;
+	  }
+    }
+	System.out.println(count);
   }
   
   /** copy from the passed fromPic to the

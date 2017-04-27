@@ -11,34 +11,34 @@ public class PictureTester
   /** Method to test zeroBlue */
   public static void testZeroBlue()
   {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.zeroBlue();
-    beach.explore();
+    Picture chella = new Picture("chella.jpg");
+    chella.explore();
+    chella.zeroBlue();
+    chella.explore();
   }
   
   public static void testKeepOnlyBlue()
   {
-	  Picture beach = new Picture("beach.jpg");
-	  beach.explore();
-	  beach.onlyBlue();
-	  beach.explore();
+	  Picture chella = new Picture("chella.jpg");
+	  chella.explore();
+	  chella.onlyBlue();
+	  chella.explore();
   }
   
   public static void testNegate()
   {
-	  Picture beach = new Picture("beach.jpg");
-	  beach.explore();
-	  beach.negate();
-	  beach.explore();
+	  Picture chella = new Picture("chella.jpg");
+	  chella.explore();
+	  chella.negate();
+	  chella.explore();
   }
   
   public static void testGrayscale()
   {
-	  Picture beach = new Picture("beach.jpg");
-	  beach.explore();
-	  beach.grayscale();
-	  beach.explore();
+	  Picture chella = new Picture("chella.jpg");
+	  chella.explore();
+	  chella.grayscale();
+	  chella.explore();
   }
   
   public static void testFixUnderwater()
@@ -58,6 +58,38 @@ public class PictureTester
     caterpillar.explore();
   }
   
+  public static void testMirrorVerticalRighttoLeft()
+  {
+    Picture chella = new Picture("chella.jpg");
+    chella.explore();
+    chella.mirrorVerticalRighttoLeft();
+    chella.explore();
+  }
+  
+  public static void testMirrorHorizontal()
+  {
+    Picture chella = new Picture("chella.jpg");
+    chella.explore();
+    chella.mirrorHorizontal();
+    chella.explore();
+  }
+  
+  public static void testMirrorHorizontalBotToTop()
+  {
+    Picture chella = new Picture("chella.jpg");
+    chella.explore();
+    chella.mirrorHorizontalBotToTop();
+    chella.explore();
+  }
+  
+  public static void testMirrorDiagonal()
+  {
+    Picture chella = new Picture("chella.jpg");
+    chella.explore();
+    chella.mirrorDiagonal();
+    chella.explore();
+  }
+  
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
   {
@@ -65,6 +97,14 @@ public class PictureTester
     temple.explore();
     temple.mirrorTemple();
     temple.explore();
+  }
+  
+  public static void testMirrorArms()
+  {
+    Picture snowman = new Picture("snowman.jpg");
+    snowman.explore();
+    snowman.mirrorArms();
+    snowman.explore();
   }
   
   /** Method to test the collage method */
@@ -96,10 +136,13 @@ public class PictureTester
     //testKeepOnlyGreen();
     //testNegate();
     //testGrayscale();
-    testFixUnderwater();
-    //testMirrorVertical();
+    //testFixUnderwater();
+	//testMirrorVertical()
+    //testMirrorVerticalRighttoLeft();
+	//testMirrorHorizontal();
+	//testMirrorHorizontalBotToTop();
     //testMirrorTemple();
-    //testMirrorArms();
+    testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
     //testCollage();
