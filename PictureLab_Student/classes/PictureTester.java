@@ -107,6 +107,14 @@ public class PictureTester
     snowman.explore();
   }
   
+  public static void testMirrorGull()
+  {
+	Picture gull = new Picture("seagull.jpg");
+    gull.explore();
+    gull.mirrorGull();
+    gull.explore();
+  }
+  
   /** Method to test the collage method */
   public static void testCollage()
   {
@@ -115,10 +123,20 @@ public class PictureTester
     canvas.explore();
   }
   
+  public static void testCopy()
+  {
+	  Picture pic = new Picture("chella.jpg");
+	  Picture pic2 = new Picture("seagull.jpg");
+	  pic.explore();
+	  pic.copy(pic2, 200, 200, 400, 400);
+	  pic.explore();
+  }
+  
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
     Picture swan = new Picture("swan.jpg");
+	swan.explore();
     swan.edgeDetection(10);
     swan.explore();
   }
@@ -137,17 +155,17 @@ public class PictureTester
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-	//testMirrorVertical()
+	//testMirrorVertical();
     //testMirrorVerticalRighttoLeft();
 	//testMirrorHorizontal();
 	//testMirrorHorizontalBotToTop();
     //testMirrorTemple();
-    testMirrorArms();
+    //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
     //testCollage();
     //testCopy();
-    //testEdgeDetection();
+    testEdgeDetection();
     //testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();
