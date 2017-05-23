@@ -3,11 +3,12 @@ public class main
 {
 	public static void main(String[]args)
 	{
-		level test = new level(20);
+		level test = new level(10);
 		Scanner kb = new Scanner(System.in);
 		int[][]shape = test.getShape();
-		boolean door = false;
-		while(!door)
+		int score = 0;
+		boolean playing = true;
+		while(playing)
 		{
 			test.printLevel();
 			System.out.println("What would you like to do?\n-Move\n-Bag\n-Leave\n");
@@ -15,7 +16,13 @@ public class main
 		
 			if(firstChoice.equalsIgnoreCase("move"))
 			{
-				test.move("move");
+				score += test.move("move");
+			}
+			else if(firstChoice.equalsIgnoreCase("leave"))
+			{
+				playing = false;
+				
+				System.out.println("Score: " + score);
 			}
 		}
 	}
