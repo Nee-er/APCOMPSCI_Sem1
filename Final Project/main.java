@@ -3,7 +3,7 @@ public class main
 {
 	public static void main(String[]args)
 	{
-		level test = new level(10);
+		level test = new level(5);
 		Scanner kb = new Scanner(System.in);
 		int[][]shape = test.getShape();
 		int score = 0;
@@ -11,7 +11,7 @@ public class main
 		while(playing)
 		{
 			test.printLevel();
-			System.out.println("What would you like to do?\n-Move\n-Bag\n-Leave\n");
+			System.out.println("What would you like to do?\n-Move\n-Leave\n");
 			String firstChoice = kb.nextLine();
 		
 			if(firstChoice.equalsIgnoreCase("move"))

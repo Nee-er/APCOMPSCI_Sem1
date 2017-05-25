@@ -36,6 +36,13 @@ public class level
 	public void setLevel()
 	{
 		Random rand = new Random();
+		for(int i = 0; i < shape.length; i++)
+		{
+			for(int y = 0; y < shape[0].length; y++)
+			{
+				shape[i][y] = 0;
+			}
+		}
 		
 		int startI = rand.nextInt(shape.length);
 		int startY = rand.nextInt(shape[0].length);
@@ -49,12 +56,11 @@ public class level
 		
 		System.out.println(startI +" "+ startY+", "+endI+" "+endY+", "+fakeEndI+" "+fakeEndY+", "+fakeEndI2+" "+fakeEndY2);
 		shape[startI][startY] = 2;
-		shape[endI][endY] = 1;
+		shape[endI][endY] = 3;
 		
 		//basic layout
 		if(startI > endI)
 		{
-			int branch = rand.nextInt(startI) + endI;
 			for(int i = startI - 1; i >= endI; i--)
 			{
 				shape[i][startY] = 1;
@@ -63,7 +69,6 @@ public class level
 		}
 		if(startI < endI)
 		{
-			int branch = rand.nextInt(endI) + startI;
 			for(int i = startI + 1; i <= endI; i++)
 			{
 				shape[i][startY] = 1;
@@ -83,6 +88,7 @@ public class level
 				shape[endI][y] = 1;
 			}
 		}
+		
 		//branching paths
 		if(startY > fakeEndY)
 		{
@@ -112,7 +118,6 @@ public class level
 				shape[i][fakeEndY] = 1;
 			}
 		}
-		
 		
 		if(startI > fakeEndI2)
 		{
@@ -146,9 +151,9 @@ public class level
 	
 	public void printLevel()
 	{
-		String room = "| |";
+		String room = "|_|";
 		String filledRoom = "|x|";
-		String empty = ".  ";
+		String empty = "....";
 		
 		for(int y = 0; y < shape[0].length; y++)
 		{
@@ -156,7 +161,7 @@ public class level
 			{
 				if(i == shape.length - 1)
 				{
-					if(shape[i][y] == 1)
+					if(!(shape[i][y] == 0) && !(shape[i][y] == 2))
 					{
 						System.out.format("%-8s", room);
 						System.out.println();
@@ -173,7 +178,7 @@ public class level
 						System.out.println();
 					}
 				}
-				else if(shape[i][y] == 1)
+				else if(!(shape[i][y] == 0) && !(shape[i][y] == 2))
 				{
 					System.out.format("%-8s", room);
 				}
@@ -219,7 +224,7 @@ public class level
 						
 						if(!(y==0))
 						{
-							if(shape[i][y-1]== 1)
+							if(!(shape[i][y-1]== 0))
 							{
 								System.out.println("-Up");
 								up = true;
@@ -228,7 +233,7 @@ public class level
 						}
 						if(!(y==shape[0].length-1))
 						{
-							if(shape[i][y+1]== 1)
+							if(!(shape[i][y+1]== 0))
 							{
 								System.out.println("-Down");
 								down = true;
@@ -236,7 +241,7 @@ public class level
 						}
 						if(!(i==0))
 						{
-							if(shape[i-1][y]== 1)
+							if(!(shape[i-1][y]== 0))
 							{
 								System.out.println("-Left");
 								left = true;
@@ -244,7 +249,7 @@ public class level
 						}
 						if(!(i==shape.length-1))
 						{
-							if(shape[i+1][y]== 1)
+							if(!(shape[i+1][y]== 0))
 							{
 								System.out.println("-Right");
 								right = true;
