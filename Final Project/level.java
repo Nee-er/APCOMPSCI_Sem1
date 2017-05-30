@@ -15,7 +15,6 @@ public class level
 	public level(int x)
 	{
 		shape = new int[x][x];
-		setLevel();
 	}
 	
 	public int[][] getShape()
@@ -33,6 +32,13 @@ public class level
 		return endY;
 	}
 	
+	
+	/* array key:
+	0 no room
+	1 empty room
+	2 player room
+	3 door to next level 
+	*/
 	public void setLevel()
 	{
 		Random rand = new Random();
@@ -199,9 +205,10 @@ public class level
 		
 	}
 	
-	public static int move(String c)
+	public static boolean move(String c)
 	{
 		Scanner kb = new Scanner(System.in);
+		rooms encounter = new rooms();
 		if(c.equalsIgnoreCase("move"))
 		{
 			boolean right = false;
@@ -266,9 +273,14 @@ public class level
 						{
 							if(moveChoice.equalsIgnoreCase("up"))
 							{
+								if(shape[iLoc][yLoc-1] == 3)
+								{
+									if(encounter.door())
+										return true;
+								}
 								shape[iLoc][yLoc-1] = 2;
 								shape[iLoc][yLoc] = 1;
-								return 1;
+								return false;
 							}
 						}
 						
@@ -278,7 +290,7 @@ public class level
 							{
 								shape[iLoc-1][yLoc] = 2;
 								shape[iLoc][yLoc] = 1;
-								return 1;
+								return false;
 							}
 						}
 						
@@ -288,7 +300,7 @@ public class level
 							{
 								shape[iLoc][yLoc+1] = 2;
 								shape[iLoc][yLoc] = 1;
-								return 1;
+								return false;
 							}
 						}
 						
@@ -298,14 +310,14 @@ public class level
 							{
 								shape[iLoc+1][yLoc] = 2;
 								shape[iLoc][yLoc] = 1;
-								return 1;
+								return false;
 							}
 						}
 						else if(moveChoice.equalsIgnoreCase("go back"))
 						{
-							return 0;
+							return false;
 						}
 		}
-		return 0;
+		return false;
 	}
 }
