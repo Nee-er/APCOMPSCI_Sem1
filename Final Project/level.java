@@ -6,6 +6,8 @@ public class level
 	private static int[][] shape;
 	private int endI;
 	private int endY;
+	private int difficulty;
+	private static int size;
 	
 	public level()
 	{
@@ -38,6 +40,9 @@ public class level
 	1 empty room
 	2 player room
 	3 door to next level 
+	4 score +
+	5 enemy
+	6 health potion
 	*/
 	public void setLevel()
 	{
@@ -69,29 +74,40 @@ public class level
 		{
 			for(int i = startI - 1; i >= endI; i--)
 			{
-				shape[i][startY] = 1;
-				
+				if(!(shape[i][startY] == 3))
+				{
+					shape[i][startY] = 1;
+				}
 			}
 		}
 		if(startI < endI)
 		{
 			for(int i = startI + 1; i <= endI; i++)
 			{
-				shape[i][startY] = 1;
+				if(!(shape[i][startY] == 3))
+				{
+					shape[i][startY] = 1;
+				}
 			}
 		}
 		if(startY > endY)
 		{
 			for(int y = startY - 1; y >= endY; y--)
 			{
-				shape[endI][y] = 1;
+				if(!(shape[endI][y] == 3))
+				{
+					shape[endI][y] = 1;
+				}
 			}
 		}
 		if(startY < endY)
 		{
 			for(int y = startY + 1; y <= endY; y++)
 			{
-				shape[endI][y] = 1;
+				if(!(shape[endI][y] == 3))
+				{
+					shape[endI][y] = 1;
+				}
 			}
 		}
 		
@@ -100,28 +116,40 @@ public class level
 		{
 			for(int y = startY - 1; y >= fakeEndY; y--)
 			{
-				shape[startI][y] = 1;
+				if(!(shape[startI][y] == 3))
+				{
+					shape[startI][y] = 1;
+				}
 			}
 		}
 		if(startY < fakeEndY)
 		{
 			for(int y = startY + 1; y <= fakeEndY; y++)
 			{
-				shape[startI][y] = 1;
+				if(!(shape[startI][y] == 3))
+				{
+					shape[startI][y] = 1;
+				}
 			}
 		}
 		if(startI > fakeEndI)
 		{
 			for(int i = startI - 1; i >= fakeEndI; i--)
 			{
-				shape[i][fakeEndY] = 1;
+				if(!(shape[i][fakeEndY] == 3))
+				{
+					shape[i][fakeEndY] = 1;
+				}
 			}
 		}
 		if(startI < fakeEndI)
 		{
 			for(int i = startI + 1; i <= fakeEndI; i++)
 			{
-				shape[i][fakeEndY] = 1;
+				if(!(shape[i][fakeEndY] == 3))
+				{
+					shape[i][fakeEndY] = 1;
+				}
 			}
 		}
 		
@@ -129,28 +157,40 @@ public class level
 		{
 			for(int i = startI - 1; i >= fakeEndI2; i--)
 			{
-				shape[i][startY] = 1;
+				if(!(shape[i][startY] == 3))
+				{
+					shape[i][startY] = 1;
+				}
 			}
 		}
 		if(startI < fakeEndI2)
 		{
 			for(int i = startI + 1; i <= fakeEndI2; i++)
 			{
-				shape[i][startY] = 1;
+				if(!(shape[i][startY] == 3))
+				{
+					shape[i][startY] = 1;
+				}
 			}
 		}
 		if(startY > fakeEndY2)
 		{
 			for(int y = startY - 1; y >= fakeEndY2; y--)
 			{
-				shape[fakeEndI2][y] = 1;
+				if(!(shape[fakeEndI2][y] == 3))
+				{
+					shape[fakeEndI2][y] = 1;
+				}
 			}
 		}
 		if(startY < fakeEndY2)
 		{
 			for(int y = startY + 1; y <= fakeEndY2; y++)
 			{
-				shape[fakeEndI2][y] = 1;
+				if(!(shape[fakeEndI2][y] == 3))
+				{
+					shape[fakeEndI2][y] = 1;
+				}
 			}
 		}
 	}
@@ -208,7 +248,6 @@ public class level
 	public static boolean move(String c)
 	{
 		Scanner kb = new Scanner(System.in);
-		rooms encounter = new rooms();
 		if(c.equalsIgnoreCase("move"))
 		{
 			boolean right = false;
@@ -268,6 +307,7 @@ public class level
 			}
 			
 			String moveChoice = kb.nextLine();
+			boolean next = false;
 			System.out.println();
 						if(up)
 						{
@@ -275,12 +315,22 @@ public class level
 							{
 								if(shape[iLoc][yLoc-1] == 3)
 								{
-									if(encounter.door())
+									next = door();
+									if(next)
 										return true;
+									/* else if(!(shape[iLoc][yLoc-2]== 0))
+									{
+										shape[iLoc][yLoc-2] = 2;
+										shape[iLoc][yLoc] = 1;
+										return false;
+									} */
 								}
-								shape[iLoc][yLoc-1] = 2;
-								shape[iLoc][yLoc] = 1;
-								return false;
+								else
+								{								
+									shape[iLoc][yLoc-1] = 2;
+									shape[iLoc][yLoc] = 1;
+									return false;
+								}
 							}
 						}
 						
@@ -288,9 +338,24 @@ public class level
 						{
 							if(moveChoice.equalsIgnoreCase("left"))
 							{
-								shape[iLoc-1][yLoc] = 2;
-								shape[iLoc][yLoc] = 1;
-								return false;
+								if(shape[iLoc-1][yLoc] == 3)
+								{
+									next = door();
+									if(next)
+										return true;
+									/* else if(!(shape[iLoc-2][yLoc] == 0))
+									{
+										shape[iLoc-2][yLoc] = 2;
+										shape[iLoc][yLoc] = 1;
+										return false;
+									} */
+								}
+								else
+								{
+									shape[iLoc-1][yLoc] = 2;
+									shape[iLoc][yLoc] = 1;
+									return false;
+								}
 							}
 						}
 						
@@ -298,9 +363,18 @@ public class level
 						{
 							if(moveChoice.equalsIgnoreCase("down"))
 							{
-								shape[iLoc][yLoc+1] = 2;
-								shape[iLoc][yLoc] = 1;
-								return false;
+								if(shape[iLoc][yLoc+1] == 3)
+								{
+									next = door();
+									if(next)
+										return true;
+								}
+								else
+								{									
+									shape[iLoc][yLoc+1] = 2;
+									shape[iLoc][yLoc] = 1;
+									return false;
+								}
 							}
 						}
 						
@@ -308,15 +382,39 @@ public class level
 						{
 							if(moveChoice.equalsIgnoreCase("right"))
 							{
-								shape[iLoc+1][yLoc] = 2;
-								shape[iLoc][yLoc] = 1;
-								return false;
+								if(shape[iLoc+1][yLoc] == 3)
+								{
+									next = door();
+									if(next)
+										return true;
+								}
+								else
+								{									
+									shape[iLoc+1][yLoc] = 2;
+									shape[iLoc][yLoc] = 1;
+									return false;
+								}
 							}
 						}
 						else if(moveChoice.equalsIgnoreCase("go back"))
 						{
 							return false;
 						}
+		}
+		return false;
+	}
+	
+	public static boolean door()
+	{
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.println("You found the door to the next level!\nWould you like to proceed?\n");
+		String answer = kb.nextLine();
+		
+		if(answer.equalsIgnoreCase("yes"))
+		{
+			System.out.println("You proceed through the door and move down the stairs.");
+			return true;
 		}
 		return false;
 	}
