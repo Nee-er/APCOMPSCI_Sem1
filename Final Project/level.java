@@ -6,17 +6,31 @@ public class level
 	private static int[][] shape;
 	private int endI;
 	private int endY;
-	private int difficulty;
+	private static int difficulty;
 	private static int size;
+	private static boolean encounter;
+	private static boolean scoreUp;
+	private static boolean fight;
+	private static int iLoc = 0;
+	private static int yLoc = 0;
+	private static String moveChoice = "";
 	
 	public level()
 	{
 		shape = new int[1][1];
+		difficulty = 0;
+		encounter = false;
+		scoreUp = false;
+		fight = false;
 	}
 	
 	public level(int x)
 	{
 		shape = new int[x][x];
+		difficulty = 0;
+		encounter = false;
+		scoreUp = false;
+		fight = false;
 	}
 	
 	public int[][] getShape()
@@ -42,7 +56,6 @@ public class level
 	3 door to next level 
 	4 score +
 	5 enemy
-	6 health potion
 	*/
 	public void setLevel()
 	{
@@ -65,7 +78,7 @@ public class level
 		int fakeEndY2 = rand.nextInt(shape[0].length);
 		
 		
-		System.out.println(startI +" "+ startY+", "+endI+" "+endY+", "+fakeEndI+" "+fakeEndY+", "+fakeEndI2+" "+fakeEndY2);
+	
 		shape[startI][startY] = 2;
 		shape[endI][endY] = 3;
 		
@@ -193,6 +206,62 @@ public class level
 				}
 			}
 		}
+		
+		//populate level
+		/* 
+		4 score +
+		5 enemy */
+		int enemy = 0;
+		int score = 0;
+		for(int i = 0; i < shape.length; i++)
+		{
+			for(int y = 0; y < shape[0].length; y++)
+			{
+				if(shape[i][y] == 1)
+				{
+					if(difficulty < 2)
+					{
+						enemy = rand.nextInt(2);
+						score = rand.nextInt(4);
+						if(enemy == 0)
+						{
+							shape[i][y] = 5;
+						}
+						if(score == 0)
+						{
+							shape[i][y] = 4;
+						}
+					}
+					if(difficulty > 2 && difficulty < 5)
+					{
+						enemy = rand.nextInt(2);
+						score = rand.nextInt(4);
+						if(score == 0)
+						{
+							shape[i][y] = 4;
+						}
+						if(enemy == 0)
+						{
+							shape[i][y] = 5;
+						}
+					}
+					if(difficulty > 5)
+					{
+						enemy = rand.nextInt(1);
+						score = rand.nextInt(4);
+						if(score == 0)
+						{
+							shape[i][y] = 4;
+						}
+						if(enemy == 0)
+						{
+							shape[i][y] = 5;
+						}
+					}
+				}
+			}
+		}
+		difficulty++;
 	}
 	
 	public void printLevel()
@@ -248,14 +317,13 @@ public class level
 	public static boolean move(String c)
 	{
 		Scanner kb = new Scanner(System.in);
+		moveChoice = " ";
 		if(c.equalsIgnoreCase("move"))
 		{
 			boolean right = false;
 			boolean left = false;
 			boolean up = false;
 			boolean down = false;
-			int iLoc = 0;
-			int yLoc = 0;
 			boolean keepGoing = true;
 			System.out.println("\nWhich direction?");
 			
@@ -306,9 +374,15 @@ public class level
 				}
 			}
 			
-			String moveChoice = kb.nextLine();
+			moveChoice = kb.nextLine();
 			boolean next = false;
 			System.out.println();
+						/* 
+						4 score +
+						5 enemy
+						
+						*/
+						
 						if(up)
 						{
 							if(moveChoice.equalsIgnoreCase("up"))
@@ -317,7 +391,10 @@ public class level
 								{
 									next = door();
 									if(next)
+									{
+										difficulty++;
 										return true;
+									}
 									/* else if(!(shape[iLoc][yLoc-2]== 0))
 									{
 										shape[iLoc][yLoc-2] = 2;
@@ -327,9 +404,28 @@ public class level
 								}
 								else
 								{								
-									shape[iLoc][yLoc-1] = 2;
-									shape[iLoc][yLoc] = 1;
-									return false;
+									if(shape[iLoc][yLoc-1] == 4 || shape[iLoc][yLoc-1] == 5)
+									{
+										encounter = true;
+										if(shape[iLoc][yLoc-1] == 4)
+										{
+											scoreUp = true;
+											shape[iLoc][yLoc-1] = 2;
+											shape[iLoc][yLoc] = 1;
+											return false;
+										}
+										if(shape[iLoc][yLoc-1] == 5)
+										{
+											fight = true;
+											return false;
+										}
+									}
+									else
+									{
+										shape[iLoc][yLoc-1] = 2;
+										shape[iLoc][yLoc] = 1;
+										return false;
+									}
 								}
 							}
 						}
@@ -342,7 +438,11 @@ public class level
 								{
 									next = door();
 									if(next)
+									{
+										difficulty++;
 										return true;
+									
+									}
 									/* else if(!(shape[iLoc-2][yLoc] == 0))
 									{
 										shape[iLoc-2][yLoc] = 2;
@@ -352,9 +452,28 @@ public class level
 								}
 								else
 								{
-									shape[iLoc-1][yLoc] = 2;
-									shape[iLoc][yLoc] = 1;
-									return false;
+									if(shape[iLoc-1][yLoc] == 4 || shape[iLoc-1][yLoc] == 5)
+									{
+										encounter = true;
+										if(shape[iLoc-1][yLoc] == 4)
+										{
+											scoreUp = true;
+											shape[iLoc-1][yLoc] = 2;
+											shape[iLoc][yLoc] = 1;
+											return false;
+										}
+										if(shape[iLoc-1][yLoc] == 5)
+										{
+											fight = true;
+											return false;
+										}
+									}
+									else
+									{
+										shape[iLoc-1][yLoc] = 2;
+										shape[iLoc][yLoc] = 1;
+										return false;
+									}
 								}
 							}
 						}
@@ -367,13 +486,34 @@ public class level
 								{
 									next = door();
 									if(next)
+									{
 										return true;
+									}
 								}
 								else
-								{									
-									shape[iLoc][yLoc+1] = 2;
-									shape[iLoc][yLoc] = 1;
-									return false;
+								{
+									if(shape[iLoc][yLoc+1] == 4 || shape[iLoc][yLoc+1] == 5)
+									{
+										encounter = true;
+										if(shape[iLoc][yLoc+1] == 4)
+										{
+											scoreUp = true;
+											shape[iLoc][yLoc+1] = 2;
+											shape[iLoc][yLoc] = 1;
+											return false;
+										}
+										if(shape[iLoc][yLoc+1] == 5)
+										{
+											fight = true;
+											return false;
+										}
+									}
+									else
+									{
+										shape[iLoc][yLoc+1] = 2;
+										shape[iLoc][yLoc] = 1;
+										return false;
+									}
 								}
 							}
 						}
@@ -386,13 +526,34 @@ public class level
 								{
 									next = door();
 									if(next)
+									{
 										return true;
+									}
 								}
 								else
-								{									
-									shape[iLoc+1][yLoc] = 2;
-									shape[iLoc][yLoc] = 1;
-									return false;
+								{		
+									if(shape[iLoc+1][yLoc] == 4 || shape[iLoc+1][yLoc] == 5)
+									{
+										encounter = true;
+										if(shape[iLoc+1][yLoc] == 4)
+										{
+											scoreUp = true;
+											shape[iLoc+1][yLoc] = 2;
+											shape[iLoc][yLoc] = 1;
+											return false;
+										}
+										if(shape[iLoc+1][yLoc] == 5)
+										{
+											fight = true;
+											return false;
+										}
+									}
+									else
+									{
+										shape[iLoc+1][yLoc] = 2;
+										shape[iLoc][yLoc] = 1;
+										return false;
+									}
 								}
 							}
 						}
@@ -413,9 +574,40 @@ public class level
 		
 		if(answer.equalsIgnoreCase("yes"))
 		{
-			System.out.println("You proceed through the door and move down the stairs.");
+			System.out.println("You proceed through the door and move down the stairs.\n");
 			return true;
 		}
 		return false;
+	}
+	
+	public static int room()
+	{
+		if(encounter)
+		{
+			if(fight)
+			{
+				encounter = false;
+				return 1;
+			}
+			
+			if(scoreUp)
+			{
+				System.out.println("You found a health potion! \nHealth+50");
+				encounter = false;
+				
+				return 50;
+			}
+		}
+		encounter = false;
+		return 0;
+	}
+	
+	public static int fight(boolean r)
+	{
+		if(r)
+		{
+			return -20;
+		}
+		return 0;
 	}
 }
