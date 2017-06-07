@@ -14,6 +14,7 @@ public class level
 	private static int iLoc = 0;
 	private static int yLoc = 0;
 	private static String moveChoice = "";
+	private static int badHealth;
 	
 	public level()
 	{
@@ -22,6 +23,7 @@ public class level
 		encounter = false;
 		scoreUp = false;
 		fight = false;
+		badHealth = 0;
 	}
 	
 	public level(int x)
@@ -31,6 +33,7 @@ public class level
 		encounter = false;
 		scoreUp = false;
 		fight = false;
+		badHealth = x;
 	}
 	
 	public int[][] getShape()
@@ -599,15 +602,6 @@ public class level
 			}
 		}
 		encounter = false;
-		return 0;
-	}
-	
-	public static int fight(boolean r)
-	{
-		if(r)
-		{
-			return -20;
-		}
 		return 0;
 	}
 }
