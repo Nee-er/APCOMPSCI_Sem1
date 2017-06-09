@@ -72,7 +72,8 @@ public class main
 			f = false;
 		}
 		System.out.println("What would you like to do?\nYou have " + score + " health.\nThe monster has " + badHealth + " health\n-Fight\n-Run\n");
-		if(kb.nextLine().equalsIgnoreCase("run"))
+		String answer = kb.nextLine();
+		if(answer.equalsIgnoreCase("run"))
 		{
 			int lost = rand.nextInt(20) + 10;
 			score-=lost;
@@ -84,33 +85,56 @@ public class main
 			}
 			return 0;
 		}
-		if(kb.nextLine().equalsIgnoreCase("fight"))
+		else if(answer.equalsIgnoreCase("fight"))
 		{
-				if(rand.nextInt(1) == 0)
+			int first = rand.nextInt(2)+1;
+			if(first == 1)
+			{
+				System.out.println("\nYou swing your sword at the monster!");
+				
+				dmgDealt = rand.nextInt(30)+20;
+				badHealth-=dmgDealt;
+				System.out.println("You dealt "+ dmgDealt +" damage!\n");
+				if(badHealth > 0)
+				{
+					System.out.println("The monster attacked you!");
+					dmgRec = rand.nextInt(30) + 10 + difficulty;
+					System.out.println("You received " + dmgRec + " damage!\n");
+					score -= dmgRec;
+					if(score <= 0)
+					{
+						System.out.println("Health: 0\nGame Over!");
+						playing = false;
+						return 0;
+					}
+				}
+				else if(badHealth <= 0)
+				{
+					System.out.println("You slayed the monster!\nHealth +10");
+					score += 10;
+					difficulty += 2;
+					test.fightWin(true);
+					return 0;
+				}
+			}
+			else if(first == 2)
+			{
+				System.out.println("\nThe monster attacks you!");
+				dmgRec = rand.nextInt(30) + 10 + difficulty;
+				score-=dmgRec;
+				System.out.println("You received "+ dmgRec +" damage!\n");
+				if(score > 0)
 				{
 					System.out.println("You swing your sword at the monster!");
-					
 					dmgDealt = rand.nextInt(30)+20;
 					badHealth-=dmgDealt;
 					System.out.println("You dealt "+ dmgDealt +" damage!\n");
-					if(badHealth > 0)
-					{
-						System.out.println("The monster attacked you!");
-						dmgRec = rand.nextInt(30) + 10 + difficulty;
-						System.out.println("You received " + dmgRec + "damage!\n");
-						score -= dmgRec;
-						if(score <= 0)
-						{
-							System.out.println("Health: 0\nGame Over!");
-							playing = false;
-							return 0;
-						}
-					}
-					else if(badHealth <= 0)
+					if(badHealth <= 0)
 					{
 						System.out.println("You slayed the monster!\nHealth +10");
 						score += 10;
 						difficulty += 2;
+						test.fightWin(true);
 						return 0;
 					}
 					else
@@ -118,53 +142,28 @@ public class main
 						fight(p, false);
 					}
 				}
-				else
+				else if(score <= 0)
 				{
-					System.out.println("The monster attacks you!");
-					dmgRec = rand.nextInt(30) + 10 + difficulty;
-					score-=dmgRec;
-					System.out.println("You received "+ dmgRec +" damage!\n");
-					if(score > 0)
-					{
-						System.out.println("You swing your sword at the monster!");
-						dmgDealt = rand.nextInt(30)+20;
-						badHealth-=dmgDealt;
-						System.out.println("You dealt "+ dmgDealt +" damage!\n");
-						if(badHealth <= 0)
-						{
-							System.out.println("You slayed the monster!\nHealth +10");
-							score += 10;
-							difficulty += 2;
-							return 0;
-						}
-						else
-						{
-							fight(p, false);
-						}
-					}
-					else if(score <= 0)
-					{
-						System.out.println("Health: 0\nGame Over!");
-						playing = false;
-						return 0;
-					}
+					System.out.println("Health: 0\nGame Over!");
+					playing = false;
+					return 0;
 				}
 			}
-			
-			if(score <= 0)
-			{
-				System.out.println("Health: 0\nGame Over!");
-				playing = false;
-				return 0;
-			}
-			
-			fight(p, false);
 		}
-		else
+			
+		if(score <= 0)
+		{
+			System.out.println("Health: 0\nGame Over!");
+			playing = false;
+			return 0;
+		}
+		else if(!(answer.equalsIgnoreCase("fight")) && !(answer.equalsIgnoreCase("run")))
 		{
 			System.out.println("Pick a move.\n");
 			fight(p, false);
 		}
+		
+		fight(p, false);
 		return 0;
 	}
 }

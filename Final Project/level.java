@@ -15,6 +15,10 @@ public class level
 	private static int yLoc = 0;
 	private static String moveChoice = "";
 	private static int badHealth;
+	private static boolean right = false;
+	private static boolean left = false;
+	private static boolean up = false;
+	private static boolean down = false;
 	
 	public level()
 	{
@@ -222,44 +226,17 @@ public class level
 			{
 				if(shape[i][y] == 1)
 				{
-					if(difficulty < 2)
+					enemy = rand.nextInt(2);
+					score = rand.nextInt(4);
+					if(score == 0)
 					{
-						enemy = rand.nextInt(2);
-						score = rand.nextInt(4);
-						if(enemy == 0)
-						{
-							shape[i][y] = 5;
-						}
-						if(score == 0)
-						{
-							shape[i][y] = 4;
-						}
+						System.out.println("yes");
+						shape[i][y] = 4;
 					}
-					if(difficulty > 2 && difficulty < 5)
+					if(enemy == 0)
 					{
-						enemy = rand.nextInt(2);
-						score = rand.nextInt(4);
-						if(score == 0)
-						{
-							shape[i][y] = 4;
-						}
-						if(enemy == 0)
-						{
-							shape[i][y] = 5;
-						}
-					}
-					if(difficulty > 5)
-					{
-						enemy = rand.nextInt(1);
-						score = rand.nextInt(4);
-						if(score == 0)
-						{
-							shape[i][y] = 4;
-						}
-						if(enemy == 0)
-						{
-							shape[i][y] = 5;
-						}
+						System.out.println("yes");
+						shape[i][y] = 5;
 					}
 				}
 			}
@@ -272,7 +249,6 @@ public class level
 		String room = "|_|";
 		String filledRoom = "|x|";
 		String empty = "....";
-		
 		for(int y = 0; y < shape[0].length; y++)
 		{
 			for(int i = 0; i < shape.length; i++)
@@ -323,10 +299,6 @@ public class level
 		moveChoice = " ";
 		if(c.equalsIgnoreCase("move"))
 		{
-			boolean right = false;
-			boolean left = false;
-			boolean up = false;
-			boolean down = false;
 			boolean keepGoing = true;
 			System.out.println("\nWhich direction?");
 			
@@ -572,7 +544,7 @@ public class level
 	{
 		Scanner kb = new Scanner(System.in);
 		
-		System.out.println("You found the door to the next level!\nWould you like to proceed?\n");
+		System.out.println("You found the door to the next level!\nWould you like to proceed (yes/no)?\n");
 		String answer = kb.nextLine();
 		
 		if(answer.equalsIgnoreCase("yes"))
@@ -604,4 +576,31 @@ public class level
 		encounter = false;
 		return 0;
 	}
+	
+	public static void fightWin(boolean t)
+	{
+		if(t)
+		{			
+			if(moveChoice.equalsIgnoreCase("up"))
+			{
+				shape[iLoc][yLoc-1] = 2;
+				shape[iLoc][yLoc] = 1;
+			}
+			else if(moveChoice.equalsIgnoreCase("left"))
+			{
+				shape[iLoc-1][yLoc] = 2;
+				shape[iLoc][yLoc] = 1;
+			}
+			else if(moveChoice.equalsIgnoreCase("down"))
+			{
+				shape[iLoc][yLoc+1] = 2;
+				shape[iLoc][yLoc] = 1;
+			}
+			else if(moveChoice.equalsIgnoreCase("right"))
+			{
+				shape[iLoc+1][yLoc] = 2;
+				shape[iLoc][yLoc] = 1;
+			}
+		}
+	}	
 }
